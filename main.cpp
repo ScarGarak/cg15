@@ -9,6 +9,23 @@ static double alpha_ = 0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
+void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
+	glBegin(GL_QUADS);            // Start Drawing Quads
+//	// Front
+//	glNormal3f( 0.0, 0.0, 1.0);			// Set Top Point Of Triangle To Red
+//	glVertex3f(-1.0, 1.0, 1.0);      // First Point Of The Triangle
+//	glVertex3f(-1.0,-1.0, 1.0);      // Second Point Of The Triangle
+//	glVertex3f( 1.0,-1.0, 1.0);      // Third Point Of The Triangle
+//	glVertex3f( 1.0, 1.0, 1.0);      // Third Point Of The Triangle
+	// bottom
+	glNormal3f( 0.0,-1.0, 0.0);
+	glVertex3f(-1.0,-1.0,-1.0);
+	glVertex3f( 1.0,-1.0,-1.0);
+	glVertex3f( 1.0,-1.0, 1.0);
+	glVertex3f(-1.0,-1.0, 1.0);
+
+	glEnd();
+}
 
 // draw a sphere composed of triangles
 void DrawSphere(const Vec3& ctr, double r){
@@ -135,6 +152,11 @@ void Preview() {
 
   SetMaterialColor(3, 1, 0, 0);
   DrawSphere(Vec3( 5, 0, 0), 2);
+
+  //Aufruf DrawQuads();
+  SetMaterialColor(1, 1, 0, 0);
+  SetMaterialColor(2, 0, 0, 1);
+  DrawQuads();
 
 }
 
