@@ -5,6 +5,11 @@
 
 #include "vec3.hpp"
 
+//ADAM TEST
+//TEST ADAM
+//ADAM TEST
+
+
 static double alpha_ = 0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
