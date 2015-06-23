@@ -11,12 +11,12 @@ static double window_height_ = 768;
 
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
-//	// Front
-//	glNormal3f( 0.0, 0.0, 1.0);			// Set Top Point Of Triangle To Red
-//	glVertex3f(-1.0, 1.0, 1.0);      // First Point Of The Triangle
-//	glVertex3f(-1.0,-1.0, 1.0);      // Second Point Of The Triangle
-//	glVertex3f( 1.0,-1.0, 1.0);      // Third Point Of The Triangle
-//	glVertex3f( 1.0, 1.0, 1.0);      // Third Point Of The Triangle
+	// Front
+	glNormal3f( 0.0, 0.0, 1.0);			// Set Top Point Of Triangle To Red
+	glVertex3f(-1.0, 1.0, 1.0);      // First Point Of The Triangle
+	glVertex3f(-1.0,-1.0, 1.0);      // Second Point Of The Triangle
+	glVertex3f( 1.0,-1.0, 1.0);      // Third Point Of The Triangle
+	glVertex3f( 1.0, 1.0, 1.0);      // Third Point Of The Triangle
 	// bottom
 	glNormal3f( 0.0,-1.0, 0.0);
 	glVertex3f(-1.0,-1.0,-1.0);
