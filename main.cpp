@@ -3,18 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 
-//
-//git commit test
-//
-//
-//
-
 #include "vec3.hpp"
-
-//ADAM TEST
-//TEST ADAM
-//ADAM TEST
-
 
 static double alpha_ = 0;
 static double window_width_ = 1024;
@@ -39,6 +28,19 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 }
 
 //draws a spaceship
+void DrawSpaceship() {
+glBegin(GL_TRIANGLES);
+	// Front top left
+	glVertex3fv(v0);		//the middle
+	glVertex3fv(v1);
+	glVertex3fv(v2);
+
+	//front top right
+	glVertex3fv(v0);
+
+
+glEnd();
+}
 
 
 // draw a sphere composed of triangles
