@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <math.h>
 
+//
+//git commit test
+//
+
 #include "vec3.hpp"
 
 static double alpha_ = 0;
