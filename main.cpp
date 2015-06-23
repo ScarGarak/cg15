@@ -31,6 +31,9 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glEnd();
 }
 
+//draws a spaceship
+
+
 // draw a sphere composed of triangles
 void DrawSphere(const Vec3& ctr, double r){
   int     i, j,
