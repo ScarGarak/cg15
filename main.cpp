@@ -9,6 +9,10 @@ static double alpha_ = 0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
+const GLfloat spShip [] = {
+		{0,0,0}
+};
+
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
 //	// Front
@@ -29,17 +33,22 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 
 //draws a spaceship
 void DrawSpaceship() {
-glBegin(GL_TRIANGLES);
-	// Front top left
-	glVertex3fv(v0);		//the middle
-	glVertex3fv(v1);
-	glVertex3fv(v2);
 
-	//front top right
-	glVertex3fv(v0);
+	glEnableClientState(GL_VERTEX_ARRAY);
 
 
-glEnd();
+//glBegin(GL_TRIANGLES);
+//	// Front top left
+//	glVertex3fv(v0);		//the middle
+//	glVertex3fv(v1);
+//	glVertex3fv(v2);
+//
+//	//front top right
+//	glVertex3fv(v0);
+//
+//
+//
+//glEnd();
 }
 
 
