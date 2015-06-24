@@ -67,4 +67,9 @@ local.properties
 # Executables
 *.exe
 *.out
+<<<<<<< HEAD
 *.app
+/Debug/
+=======
+*.app
+>>>>>>> branch 'master' of https://github.com/ScarGarak/cg15.git
