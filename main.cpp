@@ -54,18 +54,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
-//	// Front
-//	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
-//	glVertex3f(-50.0, 50.0, 50.0);      // First Point Of The Triangle
-//	glVertex3f(-50.0,-50.0, 50.0);      // Second Point Of The Triangle
-//	glVertex3f( 50.0,-50.0, 50.0);      // Third Point Of The Triangle
-//	glVertex3f( 50.0, 50.0, 50.0);      // Third Point Of The Triangle
-	// bottom
-	glNormal3f( 0.0, 0.0, 0.0);
-	glVertex3f(-10.0,-10.0,-10.0);
-	glVertex3f( 10.0,-10.0,-10.0);
-	glVertex3f( 10.0,-10.0, 10.0);
-	glVertex3f(-10.0,-10.0, 10.0);
+	// Spielfeld
+	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
+	glVertex3f(-50.0, 50.0, 0.0);      // First Point Of The Triangle
+	glVertex3f(-50.0,-50.0, 0.0);      // Second Point Of The Triangle
+	glVertex3f( 50.0,-50.0, 0.0);      // Third Point Of The Triangle
+	glVertex3f( 50.0, 50.0, 0.0);      // Third Point Of The Triangle
 
 	glEnd();
 }
@@ -175,8 +169,7 @@ void InitLighting() {
   // init coordinate system
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(-15, 15, -10, 10, -20, 20);
-
+  glOrtho(-55, 55,-55, 55,-100, 100);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -195,10 +188,11 @@ void Preview() {
 									  // since camera is at origin
 	  glRotated(alpha_, 1, 0, 0);
 	  glRotatef(beta_, 0, 1, 0);
-//	  alpha_ += .1;
 
-//	  SetMaterialColor(3, 1, 0, 0);
-//	  DrawSphere(Vec3( 5, 0, 0), 2);
+	  SetMaterialColor(3, 1, 0, 0);
+	  DrawSphere(Vec3( 0, 0, 0), 2);
+	  SetMaterialColor(3, 1, 2, 0);
+	  DrawSphere(Vec3( 25, -5, 0), 2);
 
 	  //Aufruf DrawQuads();
 	  SetMaterialColor(1, 1, 0, 0);
