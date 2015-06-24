@@ -56,11 +56,23 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
 
 	// Spielfeld
+	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Quad To Red
+	glVertex3f(-50.0, 50.0, 0.0);      // First Point Of The Quad
+	glVertex3f(-50.0,-50.0, 0.0);      // Second Point Of The Quad
+	glVertex3f( 50.0,-50.0, 0.0);      // Third Point Of The Quad
+	glVertex3f( 50.0, 50.0, 0.0);      // Fourth Point Of The Quad
+
+	glEnd();
+}
+
+void DrawShip() {
+	glBegin(GL_TRIANGLES);
+
+	// Raumschiff
 	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
-	glVertex3f(-50.0, 50.0, 0.0);      // First Point Of The Triangle
-	glVertex3f(-50.0,-50.0, 0.0);      // Second Point Of The Triangle
-	glVertex3f( 50.0,-50.0, 0.0);      // Third Point Of The Triangle
-	glVertex3f( 50.0, 50.0, 0.0);      // Third Point Of The Triangle
+	glVertex3f(-5.0, 5.0, 5.0);      // First Point Of The Triangle
+	glVertex3f(-5.0,-5.0, 5.0);      // Second Point Of The Triangle
+	glVertex3f( 5.0,-5.0, 5.0);		 // Third Point Of The Triangle
 
 	glEnd();
 }
@@ -191,15 +203,18 @@ void Preview() {
 	  glRotatef(beta_, 0, 1, 0);
 
 	  SetMaterialColor(3, 1, 0, 0);
-	  DrawSphere(Vec3( 0, 0, 0), 2);
+	  DrawSphere(Vec3( -25, 6, 0), 2);
 	  SetMaterialColor(3, 1, 2, 0);
 	  DrawSphere(Vec3( 25, -5, 0), 2);
 
 	  //Aufruf DrawQuads();
-	  SetMaterialColor(1, 1, 0, 0);
-	  SetMaterialColor(2, 0, 0, 1);
+	  SetMaterialColor(2, 1, 0, 1);
 	  DrawQuads();
 
+	  glPushMatrix();
+	  	  SetMaterialColor(3,1,0,1);
+	  	  DrawShip();
+	  glPopMatrix();
   glPopMatrix();
 }
 
