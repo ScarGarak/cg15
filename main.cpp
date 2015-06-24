@@ -1,28 +1,71 @@
+/*
+ * main.cpp
+ *
+ *  Created on: 23.06.2015
+ *      Author: Adam, Olli
+ */
+
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <iostream>
 
 #include "vec3.hpp"
 
-static double alpha_ = 0;
+static double alpha_ = 0, beta_=0;
+static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+
+    if (key == GLFW_KEY_D /*&& action == GLFW_PRESS*/) {
+    	std::cout << "D pressed!\n";
+        beta_+=1;
+        }
+    if (key == GLFW_KEY_A /*&& action == GLFW_PRESS*/) {
+    	std::cout << "A pressed!\n";
+       	beta_-=1;
+        }
+    if (key == GLFW_KEY_W /*&& action == GLFW_PRESS*/) {
+    	std::cout << "W pressed!\n";
+    	alpha_-=1;
+        }
+    if (key == GLFW_KEY_S /*&& action == GLFW_PRESS*/) {
+    	std::cout << "S pressed!\n";
+       	alpha_+=1;
+        }
+    if (key == GLFW_KEY_KP_SUBTRACT /*&& action == GLFW_PRESS*/) {
+    	std::cout << "MINUS pressed!\n";
+        zoom_-=.5;
+        }
+    if (key == GLFW_KEY_KP_ADD /*&& action == GLFW_PRESS*/) {
+    	std::cout << "PLUS pressed!\n";
+        zoom_+=.5;
+    }
+    if (key == GLFW_KEY_ESCAPE /*&& action == GLFW_PRESS*/) {
+    	std::cout << "ESCAPE pressed!\n";
+        glfwTerminate();
+        }
+        //activate_airship();
+}
+
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
-	// Front
-	glNormal3f( 0.0, 0.0, 1.0);			// Set Top Point Of Triangle To Red
-	glVertex3f(-1.0, 1.0, 1.0);      // First Point Of The Triangle
-	glVertex3f(-1.0,-1.0, 1.0);      // Second Point Of The Triangle
-	glVertex3f( 1.0,-1.0, 1.0);      // Third Point Of The Triangle
-	glVertex3f( 1.0, 1.0, 1.0);      // Third Point Of The Triangle
+//	// Front
+//	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
+//	glVertex3f(-50.0, 50.0, 50.0);      // First Point Of The Triangle
+//	glVertex3f(-50.0,-50.0, 50.0);      // Second Point Of The Triangle
+//	glVertex3f( 50.0,-50.0, 50.0);      // Third Point Of The Triangle
+//	glVertex3f( 50.0, 50.0, 50.0);      // Third Point Of The Triangle
 	// bottom
-	glNormal3f( 0.0,-1.0, 0.0);
-	glVertex3f(-1.0,-1.0,-1.0);
-	glVertex3f( 1.0,-1.0,-1.0);
-	glVertex3f( 1.0,-1.0, 1.0);
-	glVertex3f(-1.0,-1.0, 1.0);
+	glNormal3f( 0.0, 0.0, 0.0);
+	glVertex3f(-10.0,-10.0,-10.0);
+	glVertex3f( 10.0,-10.0,-10.0);
+	glVertex3f( 10.0,-10.0, 10.0);
+	glVertex3f(-10.0,-10.0, 10.0);
 
 	glEnd();
 }
@@ -145,19 +188,24 @@ void InitLighting() {
 void Preview() {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();						    // Reset The Current Modelview Matrix
-  glTranslated(0, 0, -10.0);      // Move 10 units backwards in z,
-                                  // since camera is at origin
-  glRotated(alpha_, 0, 3, 1);
-//  alpha_ += .1;
 
-  SetMaterialColor(3, 1, 0, 0);
-  DrawSphere(Vec3( 5, 0, 0), 2);
+  glPushMatrix();
 
-  //Aufruf DrawQuads();
-  SetMaterialColor(1, 1, 0, 0);
-  SetMaterialColor(2, 0, 0, 1);
-  DrawQuads();
+	  glTranslated(0, 0, zoom_);      // Move 10 units backwards in z,
+									  // since camera is at origin
+	  glRotated(alpha_, 1, 0, 0);
+	  glRotatef(beta_, 0, 1, 0);
+//	  alpha_ += .1;
 
+//	  SetMaterialColor(3, 1, 0, 0);
+//	  DrawSphere(Vec3( 5, 0, 0), 2);
+
+	  //Aufruf DrawQuads();
+	  SetMaterialColor(1, 1, 0, 0);
+	  SetMaterialColor(2, 0, 0, 1);
+	  DrawQuads();
+
+  glPopMatrix();
 }
 
 int main() {
@@ -188,6 +236,7 @@ int main() {
 
     // draw the scene
     Preview();
+    glfwSetKeyCallback(window, key_callback);
 
     // make it appear (before this, it's hidden in the rear buffer)
     glfwSwapBuffers(window);
