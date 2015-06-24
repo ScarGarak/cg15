@@ -54,6 +54,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
+
 	// Spielfeld
 	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
 	glVertex3f(-50.0, 50.0, 0.0);      // First Point Of The Triangle
