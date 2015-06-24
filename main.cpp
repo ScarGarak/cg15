@@ -74,21 +74,7 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 //draws a spaceship
 void DrawSpaceship() {
 
-	glEnableClientState(GL_VERTEX_ARRAY);
-
-
-//glBegin(GL_TRIANGLES);
-//	// Front top left
-//	glVertex3fv(v0);		//the middle
-//	glVertex3fv(v1);
-//	glVertex3fv(v2);
-//
-//	//front top right
-//	glVertex3fv(v0);
-//
-//
-//
-//glEnd();
+//TODO vielleicht zu einem 3d.odjekt machen
 }
 
 
@@ -226,6 +212,12 @@ void Preview() {
 	  SetMaterialColor(1, 1, 0, 0);
 	  SetMaterialColor(2, 0, 0, 1);
 	  DrawQuads();
+
+	  	  glPushMatrix();
+	  	  	  DrawSpaceship();
+
+
+	  	  glPopMatrix();
 
   glPopMatrix();
 }
