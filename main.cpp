@@ -18,6 +18,11 @@ static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
+
+//const GLfloat spShip [] = {
+//		{0f,0f,0f}
+//};
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 
@@ -52,6 +57,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         //activate_airship();
 }
 
+
 void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glBegin(GL_QUADS);            // Start Drawing Quads
 
@@ -76,6 +82,27 @@ void DrawShip() {
 
 	glEnd();
 }
+
+//draws a spaceship
+void DrawSpaceship() {
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+
+
+//glBegin(GL_TRIANGLES);
+//	// Front top left
+//	glVertex3fv(v0);		//the middle
+//	glVertex3fv(v1);
+//	glVertex3fv(v2);
+//
+//	//front top right
+//	glVertex3fv(v0);
+//
+//
+//
+//glEnd();
+}
+
 
 // draw a sphere composed of triangles
 void DrawSphere(const Vec3& ctr, double r){
