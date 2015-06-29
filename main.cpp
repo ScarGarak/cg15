@@ -5,18 +5,30 @@
  *      Author: Adam, Olli
  */
 
+// libs
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
+#include <vector>
 
+// header files
 #include "vec3.hpp"
+#include "Planets.hpp"
+
+using namespace::std;
+
+//Planet p = *new Planet();
 
 static double alpha_ = 0, beta_=0;
 static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
+
+void initPlanets() {
+
+}
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -116,6 +128,8 @@ void DrawSphere(const Vec3& ctr, double r){
     glEnd();
   }
 }
+
+//DrawSphere mySphere;
 
 void SetMaterialColor(int side, double r, double g, double b) {
   float	amb[4], dif[4], spe[4];
@@ -219,9 +233,12 @@ void Preview() {
 }
 
 int main() {
+
   GLFWwindow* window = NULL;
 
   printf("Here we go!\n");
+
+//  DrawSphere() mySphere;
 
   if(!glfwInit()){
     return -1;
@@ -235,6 +252,8 @@ int main() {
   }
 
   glfwMakeContextCurrent(window);
+
+//  initPlanets();
 
   while(!glfwWindowShouldClose(window)) {
     // switch on lighting (or you don't see anything)
