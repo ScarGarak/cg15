@@ -88,7 +88,7 @@ void Planet::setMaterialColor(int side, double r, double g, double b) {
 // draw a sphere composed of triangles
 void Planet::draw(const Vec3& ctr, double r){
 
-  this->setMaterialColor(2,0,235,0);
+  this->setMaterialColor(1,0,155,0);
 
   int     i, j,
           n1 = 6, n2 = 12;
