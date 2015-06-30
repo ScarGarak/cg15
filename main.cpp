@@ -19,15 +19,36 @@
 
 using namespace::std;
 
-//Planet p = *new Planet();
-
 static double alpha_ = 0, beta_=0;
 static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
-void initPlanets() {
+vector<Planet*> thePlanets;
 
+void initPlanets() {
+	std::cout << "initPlanet starts!\n";
+	// init an object vector for Planet objects
+	thePlanets = *new vector<Planet*>;
+	// generate an Planet object
+	Planet a;
+	// set position
+	a.setXPos(-25);
+	a.setYPos(6);
+	a.setMaterialColor(3, 1, 0, 0);
+	Planet b;
+	b.setMaterialColor(3, 1, 0, 0);
+	b.setXPos(25);
+	b.setYPos(-5);
+	thePlanets.push_back(&a);
+	thePlanets.push_back(&b);
+	std::cout << "initPlanet ends!\n";
+	thePlanets.
+}
+
+// Brings the game back to the beginning
+void resetGame() {
+	// code
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -216,10 +237,11 @@ void Preview() {
 	  glRotated(alpha_, 1, 0, 0);
 	  glRotatef(beta_, 0, 1, 0);
 
-	  SetMaterialColor(3, 1, 0, 0);
-	  DrawSphere(Vec3( -25, 6, 0), 2);
-	  SetMaterialColor(3, 1, 2, 0);
-	  DrawSphere(Vec3( 25, -5, 0), 2);
+//	  SetMaterialColor(3, 1, 0, 0);
+//	  DrawSphere(Vec3( -25, 6, 0), 2);
+//	  SetMaterialColor(3, 1, 2, 0);
+//	  DrawSphere(Vec3( 25, -5, 0), 2);
+	  initPlanets();
 
 	  //Aufruf DrawQuads();
 	  SetMaterialColor(2, 1, 0, 1);
