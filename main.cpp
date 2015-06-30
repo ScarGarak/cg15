@@ -5,18 +5,53 @@
  *      Author: Adam, Olli
  */
 
+// libs
 #include <GLFW/glfw3.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
+#include <vector>
 
+// header files
 #include "vec3.hpp"
+#include "Planets.hpp"
+
+using namespace::std;
 
 static double alpha_ = 0, beta_=0;
 static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
+
+vector<Planet*> thePlanets;
+
+void initPlanets() {
+	// init an object vector for Planet objects
+	thePlanets = *new vector<Planet*>;
+	// generate an Planet object
+	Planet a;
+	// set position & color
+	a.setXPos(-25);
+	a.setYPos(6);
+//	a.setMaterialColor(3, 1, 0, 0);
+
+	Planet b;
+//	b.setMaterialColor(3, 1, 2, 0);
+	b.setXPos(25);
+	b.setYPos(-5);
+	// push Planet objects to vector
+	thePlanets.push_back(&a);
+	thePlanets.push_back(&b);
+	// draw Planets
+	a.draw(Vec3(a.getXPos(),a.getYPos(),a.getZPos()),a.getSize());
+	b.draw(Vec3(b.getXPos(),b.getYPos(),b.getZPos()),b.getSize());
+}
+
+// Brings the game back to the beginning
+void resetGame() {
+	// code
+}
 
 
 //const GLfloat spShip [] = {
@@ -83,67 +118,47 @@ void DrawShip() {
 	glEnd();
 }
 
-//draws a spaceship
-void DrawSpaceship() {
+//// draw a sphere composed of triangles
+//void DrawSphere(const Vec3& ctr, double r){
+//  int     i, j,
+//          n1 = 6, n2 = 12;
+//  Vec3    normal, v1;
+//  double  a1, a1d = M_PI / n1,
+//          a2, a2d = M_PI / n2,
+//          s1, s2,
+//          c1, c2;
+//
+//  glShadeModel(GL_SMOOTH);
+//  for(i = 0; i < n1; i++){
+//    a1 = i * a1d;
+//
+//    glBegin(GL_TRIANGLE_STRIP);
+//    for(j = 0; j <= n2; j++){
+//      a2 = (j + .5 * (i % 2)) * 2 * a2d;
+//
+//      s1 = sin(a1);
+//      c1 = cos(a1);
+//      s2 = sin(a2);
+//      c2 = cos(a2);
+//      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
+//      v1 = ctr + r * normal;
+//      glNormal3dv(normal.p);
+//      glVertex3dv(v1.p);
+//
+//      s1 = sin(a1 + a1d);
+//      c1 = cos(a1 + a1d);
+//      s2 = sin(a2 + a2d);
+//      c2 = cos(a2 + a2d);
+//      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
+//      v1 = ctr + r * normal;
+//      glNormal3dv(normal.p);
+//      glVertex3dv(v1.p);
+//    }
+//    glEnd();
+//  }
+//}
 
-	glBegin(GL_TRIANGLES);
-
-		// Raumschiff
-		glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
-		glVertex3f(-5.0, 5.0, 5.0);      // First Point Of The Triangle
-		glVertex3f(-5.0,-5.0, 5.0);      // Second Point Of The Triangle
-		glVertex3f( 5.0,-5.0, 5.0);		 // Third Point Of The Triangle
-
-		glNormal3f( 0.0, 0.0, 0.0);
-		glVertex3f( 5.0, 1.0, 0.0);
-		glVertex3f( 1.0, 5.0, 0.0);
-		glVertex3f( 4.0, 3.0, 1.0);
-
-	glEnd();
-
-//TODO vielleicht zu einem 3d.odjekt machen
-}
-
-
-// draw a sphere composed of triangles
-void DrawSphere(const Vec3& ctr, double r){
-  int     i, j,
-          n1 = 6, n2 = 12;
-  Vec3    normal, v1;
-  double  a1, a1d = M_PI / n1,
-          a2, a2d = M_PI / n2,
-          s1, s2,
-          c1, c2;
-
-  glShadeModel(GL_SMOOTH);
-  for(i = 0; i < n1; i++){
-    a1 = i * a1d;
-
-    glBegin(GL_TRIANGLE_STRIP);
-    for(j = 0; j <= n2; j++){
-      a2 = (j + .5 * (i % 2)) * 2 * a2d;
-
-      s1 = sin(a1);
-      c1 = cos(a1);
-      s2 = sin(a2);
-      c2 = cos(a2);
-      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
-      v1 = ctr + r * normal;
-      glNormal3dv(normal.p);
-      glVertex3dv(v1.p);
-
-      s1 = sin(a1 + a1d);
-      c1 = cos(a1 + a1d);
-      s2 = sin(a2 + a2d);
-      c2 = cos(a2 + a2d);
-      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
-      v1 = ctr + r * normal;
-      glNormal3dv(normal.p);
-      glVertex3dv(v1.p);
-    }
-    glEnd();
-  }
-}
+//DrawSphere mySphere;
 
 void SetMaterialColor(int side, double r, double g, double b) {
   float	amb[4], dif[4], spe[4];
@@ -230,26 +245,27 @@ void Preview() {
 	  glRotated(alpha_, 1, 0, 0);
 	  glRotatef(beta_, 0, 1, 0);
 
-	  SetMaterialColor(3, 1, 0, 0);
-	  DrawSphere(Vec3( -25, 6, 0), 2);
-	  SetMaterialColor(3, 1, 2, 0);
-	  DrawSphere(Vec3( 25, -5, 0), 2);
+	  // draw the planets
+	  initPlanets();
 
 	  //Aufruf DrawQuads();
 	  SetMaterialColor(2, 1, 0, 1);
 	  DrawQuads();
 
-
 	  glPushMatrix();
-	  	  SetMaterialColor(3,1,0,1);
-	  	  DrawSpaceship();
+	  	  SetMaterialColor(3,1,0,0);
+	  	  DrawShip();
 	  glPopMatrix();
+  glPopMatrix();
 }
 
 int main() {
+
   GLFWwindow* window = NULL;
 
   printf("Here we go!\n");
+
+//  DrawSphere() mySphere;
 
   if(!glfwInit()){
     return -1;
@@ -263,6 +279,8 @@ int main() {
   }
 
   glfwMakeContextCurrent(window);
+
+//  initPlanets();
 
   while(!glfwWindowShouldClose(window)) {
     // switch on lighting (or you don't see anything)
