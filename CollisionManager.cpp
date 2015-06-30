@@ -16,9 +16,14 @@ CollisionManager::~CollisionManager() {
 	// TODO Auto-generated destructor stub
 }
 
+struct collisionBox {
+ float x, y;
+ float w, h;
+};
 
-void collisionBox () {
+void drawCollisionBox (float lenght, float x, float y) {
 //TODO KOLLISION
+
 
 
 }

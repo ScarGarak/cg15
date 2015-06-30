@@ -38,6 +38,10 @@ float Planet::getZPos(){
     return this->zPos;
 }
 
+double Planet::getSize(){
+	return this->size;
+}
+
 // setter
 
 void Planet::setXPos(float xPos){
