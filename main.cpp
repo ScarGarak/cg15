@@ -86,6 +86,21 @@ void DrawShip() {
 //draws a spaceship
 void DrawSpaceship() {
 
+	glBegin(GL_TRIANGLES);
+
+		// Raumschiff
+		glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
+		glVertex3f(-5.0, 5.0, 5.0);      // First Point Of The Triangle
+		glVertex3f(-5.0,-5.0, 5.0);      // Second Point Of The Triangle
+		glVertex3f( 5.0,-5.0, 5.0);		 // Third Point Of The Triangle
+
+		glNormal3f( 0.0, 0.0, 0.0);
+		glVertex3f( 5.0, 1.0, 0.0);
+		glVertex3f( 1.0, 5.0, 0.0);
+		glVertex3f( 4.0, 3.0, 1.0);
+
+	glEnd();
+
 //TODO vielleicht zu einem 3d.odjekt machen
 }
 
@@ -227,7 +242,7 @@ void Preview() {
 
 	  glPushMatrix();
 	  	  SetMaterialColor(3,1,0,1);
-	  	  DrawShip();
+	  	  DrawSpaceship();
 	  glPopMatrix();
 }
 
