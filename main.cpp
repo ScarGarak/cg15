@@ -16,6 +16,7 @@
 // header files
 #include "vec3.hpp"
 #include "Planets.hpp"
+#include "Ship.hpp"
 
 using namespace::std;
 
@@ -25,9 +26,19 @@ static double window_width_ = 1024;
 static double window_height_ = 768;
 
 vector<Planet*> thePlanets;
+vector<Ship*> theShip;
+
+void initShip() {
+	// init object vector for Ship
+	theShip = *new vector<Ship*>;
+	// generate an Ship object
+	Ship a;
+
+	a.draw();
+}
 
 void initPlanets() {
-	// init an object vector for Planet objects
+	// init object vector for Planet
 	thePlanets = *new vector<Planet*>;
 	// generate an Planet object
 	Planet a;
@@ -98,10 +109,10 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 
 	// Spielfeld
 	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Quad To Red
-	glVertex3f(-50.0, 50.0, 0.0);      // First Point Of The Quad
-	glVertex3f(-50.0,-50.0, 0.0);      // Second Point Of The Quad
-	glVertex3f( 50.0,-50.0, 0.0);      // Third Point Of The Quad
-	glVertex3f( 50.0, 50.0, 0.0);      // Fourth Point Of The Quad
+	glVertex3f(-50.0, 50.0,-4.0);      // First Point Of The Quad
+	glVertex3f(-50.0,-50.0,-4.0);      // Second Point Of The Quad
+	glVertex3f( 50.0,-50.0,-4.0);      // Third Point Of The Quad
+	glVertex3f( 50.0, 50.0,-4.0);      // Fourth Point Of The Quad
 
 	glEnd();
 }
@@ -207,12 +218,11 @@ void Preview() {
 	  initPlanets();
 
 	  //Aufruf DrawQuads();
-	  SetMaterialColor(1, 155, 0, 0);
+	  SetMaterialColor(3, 155, 0, 0);
 	  DrawQuads();
 
 	  glPushMatrix();
-	  	  SetMaterialColor(3,1,0,0);
-	  	  DrawShip();
+	  	  initShip();
 	  glPopMatrix();
   glPopMatrix();
 }
@@ -237,8 +247,6 @@ int main() {
   }
 
   glfwMakeContextCurrent(window);
-
-//  initPlanets();
 
   while(!glfwWindowShouldClose(window)) {
     // switch on lighting (or you don't see anything)

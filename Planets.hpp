@@ -8,7 +8,7 @@
 #ifndef PLANETS_H
 #define PLANETS_H
 
-#define Planet_Radius 2
+#define Planet_Radius 4
 
 #include <GLFW/glfw3.h>
 #include <math.h>

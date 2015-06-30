@@ -12,8 +12,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-#include <iostream>
-#include <string>
 
 // constructor
 Planet::Planet() {
@@ -26,19 +24,19 @@ Planet::~Planet() {
 }
 
 // getter
-float Planet::getXPos(){
+float Planet::getXPos() {
     return this->xPos;
 }
 
-float Planet::getYPos(){
+float Planet::getYPos() {
     return this->yPos;
 }
 
-float Planet::getZPos(){
+float Planet::getZPos() {
     return this->zPos;
 }
 
-double Planet::getSize(){
+double Planet::getSize() {
 	return this->size;
 }
 
