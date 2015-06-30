@@ -70,6 +70,9 @@ local.properties
 <<<<<<< HEAD
 *.app
 /Debug/
+<<<<<<< HEAD
 =======
 *.app
 >>>>>>> branch 'master' of https://github.com/ScarGarak/cg15.git
+=======
+>>>>>>> 306b7c82054553e7bdf7cda21a82c70be8e265fc

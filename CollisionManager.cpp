@@ -18,5 +18,7 @@ CollisionManager::~CollisionManager() {
 
 
 void collisionBox () {
+//TODO KOLLISION
 
-}q
+
+}
