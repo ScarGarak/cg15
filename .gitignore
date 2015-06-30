@@ -75,4 +75,8 @@ local.properties
 *.app
 >>>>>>> branch 'master' of https://github.com/ScarGarak/cg15.git
 =======
+<<<<<<< HEAD
 >>>>>>> 306b7c82054553e7bdf7cda21a82c70be8e265fc
+=======
+>>>>>>> refs/heads/Olli
+>>>>>>> master

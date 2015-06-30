@@ -28,29 +28,33 @@ vector<Planet*> thePlanets;
 
 
 void initPlanets() {
-	std::cout << "initPlanet starts!\n";
 	// init an object vector for Planet objects
 	thePlanets = *new vector<Planet*>;
 	// generate an Planet object
 	Planet a;
-	// set position
+	// set position & color
 	a.setXPos(-25);
 	a.setYPos(6);
-	a.setMaterialColor(3, 1, 0, 0);
+//	a.setMaterialColor(3, 1, 0, 0);
+
 	Planet b;
-	b.setMaterialColor(3, 1, 0, 0);
+//	b.setMaterialColor(3, 1, 2, 0);
 	b.setXPos(25);
 	b.setYPos(-5);
+	// push Planet objects to vector
 	thePlanets.push_back(&a);
 	thePlanets.push_back(&b);
 	std::cout << "initPlanet ends!\n";
-	//thePlanets.
+	// draw Planets
+	a.draw(Vec3(a.getXPos(),a.getYPos(),a.getZPos()),a.getSize());
+	b.draw(Vec3(b.getXPos(),b.getYPos(),b.getZPos()),b.getSize());
 }
 
 // Brings the game back to the beginning
 void resetGame() {
 	// code
 }
+
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -112,27 +116,6 @@ void DrawShip() {
 	glEnd();
 }
 
-//draws a spaceship
-void DrawSpaceship() {
-
-	glBegin(GL_TRIANGLES);
-
-		// Raumschiff
-		glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
-		glVertex3f(-5.0, 5.0, 5.0);      // First Point Of The Triangle
-		glVertex3f(-5.0,-5.0, 5.0);      // Second Point Of The Triangle
-		glVertex3f( 5.0,-5.0, 5.0);		 // Third Point Of The Triangle
-
-		glNormal3f( 0.0, 0.0, 0.0);
-		glVertex3f( 5.0, 1.0, 0.0);
-		glVertex3f( 1.0, 5.0, 0.0);
-		glVertex3f( 4.0, 3.0, 1.0);
-
-	glEnd();
-
-//TODO vielleicht zu einem 3d.odjekt machen
-}
-
 
 // draw a sphere composed of triangles
 void DrawSphere(const Vec3& ctr, double r){
@@ -173,6 +156,46 @@ void DrawSphere(const Vec3& ctr, double r){
     glEnd();
   }
 }
+
+//// draw a sphere composed of triangles
+//void DrawSphere(const Vec3& ctr, double r){
+//  int     i, j,
+//          n1 = 6, n2 = 12;
+//  Vec3    normal, v1;
+//  double  a1, a1d = M_PI / n1,
+//          a2, a2d = M_PI / n2,
+//          s1, s2,
+//          c1, c2;
+//
+//  glShadeModel(GL_SMOOTH);
+//  for(i = 0; i < n1; i++){
+//    a1 = i * a1d;
+//
+//    glBegin(GL_TRIANGLE_STRIP);
+//    for(j = 0; j <= n2; j++){
+//      a2 = (j + .5 * (i % 2)) * 2 * a2d;
+//
+//      s1 = sin(a1);
+//      c1 = cos(a1);
+//      s2 = sin(a2);
+//      c2 = cos(a2);
+//      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
+//      v1 = ctr + r * normal;
+//      glNormal3dv(normal.p);
+//      glVertex3dv(v1.p);
+//
+//      s1 = sin(a1 + a1d);
+//      c1 = cos(a1 + a1d);
+//      s2 = sin(a2 + a2d);
+//      c2 = cos(a2 + a2d);
+//      normal = c1 * XVec3 + s1 * (c2 * YVec3 + s2 * ZVec3);
+//      v1 = ctr + r * normal;
+//      glNormal3dv(normal.p);
+//      glVertex3dv(v1.p);
+//    }
+//    glEnd();
+//  }
+//}
 
 //DrawSphere mySphere;
 
@@ -267,12 +290,15 @@ void Preview() {
 //	  DrawSphere(Vec3( 25, -5, 0), 2);
 	  initPlanets();
 
+	  // draw the planets
+	  initPlanets();
+
 	  //Aufruf DrawQuads();
 	  SetMaterialColor(2, 1, 0, 1);
 	  DrawQuads();
 
 	  glPushMatrix();
-	  	  SetMaterialColor(3,1,0,1);
+	  	  SetMaterialColor(3,1,0,0);
 	  	  DrawShip();
 	  glPopMatrix();
   glPopMatrix();

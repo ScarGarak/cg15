@@ -29,13 +29,13 @@ protected:
 	float xPos = 0;
 	float yPos = 0;
 	float zPos = 0;
-	double size = 2;
+	double size = 4;
 
 	// weight
 	float mass = 1;
 
 	// Set color
-//	void setMaterialColor(int side, double r, double g, double b);
+	virtual void setMaterialColor(int side, double r, double g, double b);
 
 	float radius = Planet_Radius;
 
@@ -55,7 +55,7 @@ public:
 
 	void draw(const Vec3 & ctr, double r);
 
-	void setMaterialColor(int side, double r, double g, double b);
+//	void setMaterialColor(int side, double r, double g, double b);
 
 	// own methods
 	float getMass();
