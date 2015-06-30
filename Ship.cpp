@@ -114,7 +114,7 @@ void Ship::setMaterialColor(int side, double r, double g, double b) {
 
 void Ship::draw() {
 
-	this->setMaterialColor(3,0,155,155);
+	this->setMaterialColor(3,0,0,198);
 
 	glBegin(GL_TRIANGLES);
 

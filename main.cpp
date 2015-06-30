@@ -117,18 +117,6 @@ void DrawQuads(/*Parameter um Position zu beeinflussen(x,y,z)*/) {
 	glEnd();
 }
 
-void DrawShip() {
-	glBegin(GL_TRIANGLES);
-
-	// Raumschiff
-	glNormal3f( 0.0, 0.0, 0.0);			// Set Top Point Of Triangle To Red
-	glVertex3f(-5.0, 5.0, 5.0);      // First Point Of The Triangle
-	glVertex3f(-5.0,-5.0, 5.0);      // Second Point Of The Triangle
-	glVertex3f( 5.0,-5.0, 5.0);		 // Third Point Of The Triangle
-
-	glEnd();
-}
-
 void SetMaterialColor(int side, double r, double g, double b) {
   float	amb[4], dif[4], spe[4];
   int mat;
@@ -218,7 +206,7 @@ void Preview() {
 	  initPlanets();
 
 	  //Aufruf DrawQuads();
-	  SetMaterialColor(3, 155, 0, 0);
+	  SetMaterialColor(3, 0, 0, 0);
 	  DrawQuads();
 
 	  glPushMatrix();
