@@ -21,8 +21,10 @@ struct collisionBox {
  float w, h;
 };
 
+
 void drawCollisionBox (float lenght, float x, float y) {
 //TODO KOLLISION
+	glBegin(GL_LINE_LOOP)
 
 
 
