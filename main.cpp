@@ -18,42 +18,56 @@
 #include "Planets.hpp"
 #include "Ship.hpp"
 
-using namespace::std;
+//using namespace::std;
 
-static double alpha_ = 0, beta_=0;
+Ship ship = *new Ship;
+//vector<Planet*> thePlanets;
+//Planet planet = *new Planet;
+//planet = *new vector<Planet*>;
+
+static double alpha_ = 0, beta_ = 0, gamma_ = 0, shipTransX_ = 0, shipTransY_ = 0;
 static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
 
 vector<Planet*> thePlanets;
-vector<Ship*> theShip;
+//vector<Ship*> theShip;
+
+
 
 void initShip() {
-	// init object vector for Ship
-	theShip = *new vector<Ship*>;
-	// generate an Ship object
-	Ship a;
+//	// init object vector for Ship
+//	theShip = *new vector<Ship*>;
+//	// generate an Ship object
+//	Ship ship;
 
-	a.draw();
+	ship.draw();
+	// übergabe der Parameter (pos) des Schiffes
+}
+
+void moveShip() {
+
 }
 
 void initPlanets() {
 	// init object vector for Planet
 	thePlanets = *new vector<Planet*>;
-	// generate an Planet object
+
+	// generate an Planet object a
 	Planet a;
-	// set position & color
+	// set position
 	a.setXPos(-25);
 	a.setYPos(6);
-//	a.setMaterialColor(3, 1, 0, 0);
 
+	// generate an Planet object b
 	Planet b;
-//	b.setMaterialColor(3, 1, 2, 0);
 	b.setXPos(25);
 	b.setYPos(-5);
+
 	// push Planet objects to vector
 	thePlanets.push_back(&a);
 	thePlanets.push_back(&b);
+
 	// draw Planets
 	a.draw(Vec3(a.getXPos(),a.getYPos(),a.getZPos()),a.getSize());
 	b.draw(Vec3(b.getXPos(),b.getYPos(),b.getZPos()),b.getSize());
@@ -63,11 +77,6 @@ void initPlanets() {
 void resetGame() {
 	// code
 }
-
-
-//const GLfloat spShip [] = {
-//		{0f,0f,0f}
-//};
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -100,7 +109,22 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     	std::cout << "ESCAPE pressed!\n";
         glfwTerminate();
         }
-        //activate_airship();
+    if (key == GLFW_KEY_RIGHT) {
+    	std::cout << "RIGHT pressed!/n";
+    	gamma_-=1;
+    }
+    if (key == GLFW_KEY_LEFT) {
+    	std::cout << "RIGHT pressed!/n";
+    	gamma_+=1;
+    }
+
+    // bisher ohne berücksichtigung des Richtungsvektors
+    if (key == GLFW_KEY_UP) {
+    	ship.move();
+    }
+    if (key == GLFW_KEY_DOWN) {
+    	// ship.move(); backwards
+    }
 }
 
 
@@ -210,6 +234,14 @@ void Preview() {
 	  DrawQuads();
 
 	  glPushMatrix();
+//	  	  ship.
+	  	  // Move the Spaceship (forward/backward)
+	  	  glTranslatef(shipTransX_,shipTransY_,0);
+	  	  // Rotate the Spaceship
+	  	  glRotatef(gamma_,0,0,1);
+
+
+
 	  	  initShip();
 	  glPopMatrix();
   glPopMatrix();
@@ -221,7 +253,10 @@ int main() {
 
   printf("Here we go!\n");
 
-//  DrawSphere() mySphere;
+//	// init object vector for Ship
+//	theShip = *new vector<Ship*>;
+	// generate an Ship object
+	Ship ship;
 
   if(!glfwInit()){
     return -1;
