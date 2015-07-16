@@ -25,7 +25,7 @@ Ship ship = *new Ship;
 //Planet planet = *new Planet;
 //planet = *new vector<Planet*>;
 
-static double alpha_ = 0, beta_ = 0, gamma_ = 0, shipTransX_ = 0, shipTransY_ = 0;
+static double alpha_ = 0, beta_ = 0, gamma_ = 0;
 static double zoom_ = -12.0;
 static double window_width_ = 1024;
 static double window_height_ = 768;
@@ -111,10 +111,22 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         }
     if (key == GLFW_KEY_RIGHT) {
     	std::cout << "RIGHT pressed!/n";
+    	ship.setShipTransX_(ship.getNextPosCenterX());
+    	ship.setShipTransY_(ship.getNextPosCenterY());
+//    	std::cout << ship.getshipTransX_();
+//    	std::cout << " x/n";
+//    	std::cout << ship.getshipTransY_();
+//    	std::cout << " y/n";
     	gamma_-=1;
     }
     if (key == GLFW_KEY_LEFT) {
-    	std::cout << "RIGHT pressed!/n";
+    	std::cout << "LEFT pressed!/n";
+    	ship.setShipTransX_(ship.getNextPosCenterX());
+    	ship.setShipTransY_(ship.getNextPosCenterY());
+//    	std::cout << ship.getshipTransX_();
+//    	std::cout << " x/n";
+//    	std::cout << ship.getshipTransY_();
+//    	std::cout << " y/n";
     	gamma_+=1;
     }
 
@@ -234,11 +246,11 @@ void Preview() {
 	  DrawQuads();
 
 	  glPushMatrix();
-//	  	  ship.
-	  	  // Move the Spaceship (forward/backward)
-	  	  glTranslatef(shipTransX_,shipTransY_,0);
+
+	  	  glTranslatef(-ship.getshipTransX_(),-ship.getshipTransY_(),0);
 	  	  // Rotate the Spaceship
 	  	  glRotatef(gamma_,0,0,1);
+	  	  glTranslated(ship.getshipTransX_(),ship.getshipTransY_(),0);
 
 
 

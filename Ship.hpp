@@ -25,6 +25,7 @@ class Ship {
 protected:
 
 	// Hilfsvariable zum berechnen des Richtungsvektors
+	float abX, abY, bcX, bcY, acX, acY, shipTransX_, shipTransY_;
 	float posCenter[3] = {0,0,0};
 
 	float posPeak[3] = {0,5.0,0};
@@ -41,7 +42,7 @@ protected:
 	float nextPosFR[3] = {-2.0,0,-2.0};
 
 	bool moving = false;
-	float speed = 0.5;
+	float speed = 0.2;
 	float mass = 1;
 
 	void setMaterialColor(int side, double r, double g, double b);
@@ -52,6 +53,15 @@ public:
 	~Ship();
 
 	// getter/setter declaration
+	float getAbX();
+	float getAbY();
+	float getBcX();
+	float getBcY();
+	float getAcX();
+	float getAcY();
+	float getshipTransX_();
+	float getshipTransY_();
+
 	float getPosCenterX();
 	float getPosCenterY();
 	float getPosPeakX();
@@ -80,6 +90,16 @@ public:
 
 	float getDirection();
 	bool getMovement();
+
+
+	void setAbX(float abX);
+	void setAbY(float abY);
+	void setBcX(float bcX);
+	void setBcY(float bcY);
+	void setAcX(float acX);
+	void setAcY(float acY);
+	void setShipTransX_(float shipTransX_);
+	void setShipTransY_(float shipTransY_);
 
 	void setPosCenterX(float posCenterX);
 	void setPosCenterY(float posCenterY);

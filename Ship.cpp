@@ -23,6 +23,39 @@ Ship::~Ship() {
 }
 
 // getter
+
+float Ship::getAbX() {
+	return this->abX;
+}
+
+float Ship::getAbY() {
+	return this->abY;
+}
+
+float Ship::getBcX() {
+	return this->bcX;
+}
+
+float Ship::getBcY() {
+	return this->bcY;
+}
+
+float Ship::getAcX() {
+	return this->acX;
+}
+
+float Ship::getAcY() {
+	return this->acY;
+}
+
+float Ship::getshipTransX_() {
+	return this->shipTransX_;
+}
+
+float Ship::getshipTransY_() {
+	return this->shipTransY_;
+}
+
 float Ship::getPosCenterX() {
 	return this->posCenter[0];
 }
@@ -122,9 +155,39 @@ bool Ship::getMovement() {
     return this->moving;
 }
 
-// getter/setter für die speed Variable
-
 // setter
+
+void Ship::setAbX(float abX) {
+	this->abX = abX;
+}
+
+void Ship::setAbY(float abY) {
+	this->abY = abY;
+}
+
+void Ship::setBcX(float bcX) {
+	this->bcX = bcX;
+}
+
+void Ship::setBcY(float bcY) {
+	this->bcY = bcY;
+}
+
+void Ship::setAcX(float acX) {
+	this->acX = acX;
+}
+
+void Ship::setAcY(float acY) {
+	this->acY = acY;
+}
+
+void Ship::setShipTransX_(float shipTransX_) {
+	this->shipTransX_ = shipTransX_;
+}
+void Ship::setShipTransY_(float shipTransY_) {
+	this->shipTransY_ = shipTransY_;
+}
+
 void Ship::setPosCenterX(float posCenterX) {
 	this->posCenter[0] = posCenterX;
 }
@@ -154,7 +217,7 @@ void Ship::setPosBRX(float posBRX) {
 }
 
 void Ship::setPosBRY(float posBRY) {
-	this->posBR[0] = posBRY;
+	this->posBR[1] = posBRY;
 }
 
 void Ship::setPosFLX(float posFLX) {
@@ -202,7 +265,7 @@ void Ship::setNextPosBRX(float nextPosBRX) {
 }
 
 void Ship::setNextPosBRY(float nextPosBRY) {
-	this->nextPosBR[0] = nextPosBRY;
+	this->nextPosBR[1] = nextPosBRY;
 }
 
 void Ship::setNextPosFLX(float nextPosFLX) {
@@ -295,52 +358,50 @@ void Ship::draw() {
 }
 
 void Ship::move() {
-    	// AB = B - A
-    	float abX = getPosBRX() - getPosCenterX();
-    	float abY = getPosBRY() - getPosCenterY();
-    	// BC = C - B
-    	float bcX = getPosPeakX() - getPosBRX();
-    	float bcY = getPosPeakY() - getPosBRY();
-    	float acX = abX + bcX;
-    	float acY = abY + bcY;
+	// AB = B - A
+    this->setAbX(getPosBRX() - getPosCenterX());
+    this->setAbY(getPosBRY() - getPosCenterY());
+    // BC = C - B
+    this->setBcX(getPosPeakX() - getPosBRX());
+    this->setBcY(getPosPeakY() - getPosBRY());
 
-    	// setzen der nextPos X/Y Koordinaten
-    	// Position(t+1)=position(t)+richtungsvektor*geschwindigkeit
-    	setNextPosCenterX(getNextPosCenterX() + acX * 0.5);
-    	setNextPosCenterY(getNextPosCenterY() + acX * 0.5);
-    	setNextPosPeakX(getPosPeakX() + acX * 0.5);
-    	setNextPosPeakY(getPosPeakY() + acY * 0.5);
-//    	setNextPosBLX(getPosBLX() + acY * 0.5);
-//    	setNextPosBLY(getPosBLY() + acY * 0.5);
-//    	setNextPosFLX(getPosFLX() + acY * 0.5);
-//    	setNextPosFLY(getPosFLY() + acY * 0.5);
-//    	setNextPosBRX(getPosBLX() + acY * 0.5);
-//    	setNextPosBRY(getPosBLY() + acY * 0.5);
-//    	setNextPosFRX(getPosFLX() + acY * 0.5);
-//    	setNextPosFRY(getPosFLY() + acY * 0.5);
+    this->setAcX(getAbX() + getBcX());
+    this->setAcY(getAbY() + getBcY());
 
-    	this->setPosCenterX(getNextPosCenterX());
-    	this->setPosCenterY(getNextPosCenterY());
-        this->setPosPeakX(getNextPosPeakX());
-        this->setPosPeakY(getNextPosPeakY());
-//        this->setPosBLX(getNextPosBLX());
-//        this->setPosBLY(getNextPosBLY());
-//        this->setPosFLX(getNextPosFLX());
-//        this->setPosFLY(getNextPosFLY());
-//        this->setPosBRX(getNextPosBRX());
-//        this->setPosBRY(getNextPosBRY());
-//        this->setPosFRX(getNextPosFRX());
-//        this->setPosFRY(getNextPosFRY());
+    // setzen der nextPos X/Y Koordinaten
+    // Position(t+1)=position(t)+richtungsvektor*geschwindigkeit
+    this->setNextPosCenterX(getNextPosCenterX() + getAcX() * speed);
+    this->setNextPosCenterY(getNextPosCenterY() + getAcY() * speed);
 
+    this->setNextPosPeakX(getPosPeakX() + getAcX() * speed);
+    this->setNextPosPeakY(getPosPeakY() + getAcY() * speed);
 
-//        this->setPosBL(nextPosBL);
-//		this->setPosFL(nextPosFL);
-//		this->setPosBR(nextPosBR);
-//		this->setPosFR(nextPosFR);
+    this->setNextPosBLX(getPosBLX() + getAcX() * speed);
+    this->setNextPosBLY(getPosBLY() + getAcY() * speed);
+    this->setNextPosFLX(getPosFLX() + getAcX() * speed);
+    this->setNextPosFLY(getPosFLY() + getAcY() * speed);
+    this->setNextPosBRX(getPosBRX() + getAcX() * speed);
+    this->setNextPosBRY(getPosBRY() + getAcY() * speed);
+    this->setNextPosFRX(getPosFRX() + getAcX() * speed);
+    this->setNextPosFRY(getPosFRY() + getAcY() * speed);
 
-	// Position(t+1)=position(t)+richtungsvektor*geschwindigkeit
-	// Position(t+1) = posPeak[0]
-//	posPeak[0] = posPeak[0] + (LookVec[0] * (Direction * 0.01));
-//	posPeak[1] = posPeak[1] + (LookVec[1] * (Direction * 0.01));
-//	posPeak[2] = posPeak[2] + (LookVec[2] * (Direction * 0.01));
+    this->setPosCenterX(getNextPosCenterX());
+    this->setPosCenterY(getNextPosCenterY());
+//    setzen der rotationsparameter
+
+	std::cout << this->getPosCenterY();
+	std::cout << "/n";
+
+    this->setPosPeakX(getNextPosPeakX());
+    this->setPosPeakY(getNextPosPeakY());
+
+    this->setPosBLX(getNextPosBLX());
+    this->setPosBLY(getNextPosBLY());
+    this->setPosFLX(getNextPosFLX());
+    this->setPosFLY(getNextPosFLY());
+    this->setPosBRX(getNextPosBRX());
+    this->setPosBRY(getNextPosBRY());
+    this->setPosFRX(getNextPosFRX());
+    this->setPosFRY(getNextPosFRY());
+
 }
